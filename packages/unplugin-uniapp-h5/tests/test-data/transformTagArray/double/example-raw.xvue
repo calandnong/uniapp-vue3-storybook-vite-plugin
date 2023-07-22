@@ -1,0 +1,270 @@
+<!-- eslint-disable vue/no-v-html -->
+<template>
+  <div
+    :class="{
+      'rate-act': true,
+      'themed-page-bg': true,
+      'fit-font-30': true,
+    }"
+    :style="{
+      backgroundImage: `url(${bgImage})`,
+    }"
+  >
+    <!-- title区域 -->
+    <div class="rate-act-title">
+      {{ title }}
+    </div>
+    <div class="rate-act-box">
+      <!-- 活动描述 -->
+      <div
+        class="rate-act-desc"
+        v-html="desc"
+      />
+      <!-- 奖品区 -->
+      <img
+        v-if="awardImgbanner"
+        class="rate-act-banner"
+        :src="awardImgbanner"
+        alt=""
+      >
+      <!-- 成功邀请进度 -->
+      <RateIcon
+        class="rate-act-icon"
+        :active-num="3"
+        :accepter-list="accepterList"
+        :show-empty-icon="true"
+        :show-lock-icon="false"
+      />
+      <div
+        class="rate-act-state-desc"
+        v-html="stateDesc"
+      />
+      <RateButton
+        class="rate-act-btn"
+        :disabled="btnDisabled"
+        @click="onBtnClick"
+      >
+      <!-- 此处为span,但不会被转换 -->
+        {{ span }}
+      </RateButton>
+    </div>
+
+    <!-- 跳转详细规则按钮 -->
+    <span class="rate-act-bottom-buttons">
+      <!-- 我的提升卡 -->
+      <a
+        class="rate-act-bottom-buttons-my-rate-card"
+        @click="goActCenter"
+      />
+      <!-- 条款及细则 -->
+      <!-- 此处为span -->
+      <span
+        class="rate-act-bottom-buttons-detail"
+        @click="onProtocalClick"
+      />
+    </span>
+    <!-- 分享遮罩 -->
+    <ShareMask
+      v-show="isShowShare"
+      locale="zh-hk"
+      :share-moments="true"
+      @click="onCloseShareMask"
+    >
+      即可分享
+    </ShareMask>
+    <!-- 协议 -->
+    <FitHalfScreenDialog
+      id="prom-dialog"
+      :auto-body="true"
+      :title="protocalTitle"
+      :visible="showProtocal"
+      :append-to-body="true"
+      @on-close="showProtocal=false"
+    >
+      <template
+        #bd
+      >
+        <div class="focus-picker__bd">
+          <!-- 此处为span -->
+          <span
+            class="protocal"
+            v-html="protocal"
+          />
+          <span class="xxx" :key="pro">的那就是的</span>
+          <span class="xxx" :key="pro">的那就是的</span>
+          <span class="xxx" :key="pro">的那就是的</span>
+        </div>
+      </template>
+    </FitHalfScreenDialog>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { AccpeterList } from '@/api';
+import RateIcon from './components/avatar.vue';
+import RateButton from './components/button.vue';
+import ShareMask from '@/components/success/ShareMask.vue';
+import { FitHalfScreenDialog } from '@/fit-ui';
+
+
+interface Props{
+  // '推廣期：4月1日-4月30日'
+  title: string;
+  // '每邀請1位新用戶完成匯款 可得35日匯率提升卡，多邀多得！'
+  desc: string;
+  btnText: string;
+  btnDisabled: boolean;
+  // 目前已邀請 0 位新用戶<br/>獲得了0日匯率提升卡
+  stateDesc: string;
+  // st.moneydata.hk/res/uploadcdn-static/hkremit/general/20230414095249/Slice.png
+  bgImage: string;
+  // 预热banner
+  awardImgbanner: string;
+  // 匯率提升卡獎賞活動細則
+  protocalTitle: string;
+  protocal: string;
+  accepterList: AccpeterList,
+  isShowShare: boolean;
+}
+withDefaults(defineProps<Props>(), {
+  title: '',
+  desc: '',
+  btnText: '',
+  btnDisabled: false,
+  stateDesc: '',
+  bgImage: '',
+  awardImgbanner: '',
+  protocalTitle: '',
+  protocal: '',
+  accepterList: () => ([]),
+  isShowShare: false,
+});
+const emit = defineEmits(['onProtocalClick', 'goActCenter', 'onBtnClick', 'onCloseShareMask']);
+const showProtocal = ref(false);
+const onProtocalClick = () => {
+  showProtocal.value = true;
+  emit('onProtocalClick');
+};
+const goActCenter = () => {
+  emit('goActCenter');
+};
+const onBtnClick = () => {
+  emit('onBtnClick');
+};
+const onCloseShareMask = () => {
+  emit('onCloseShareMask');
+};
+</script>
+<style lang="less" scoped>
+@import url("~@/less/main.less");
+
+
+.rate-act {
+  position: relative;
+  width: 750/@rem;
+  min-height: 1282 / @rem; // 防止小机型显示不全
+  height: 100vh;
+  background-color: #151456; // 图片不能完全覆盖部分机型，设置背景颜色
+  backdrop-filter: blur(5px);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  font-family: PingFangSC-Regular;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // 标题
+  &-title {
+    left: 48 / @rem;
+    top: 72 / @rem;
+    font-size: 24 / @rem;
+    line-height: 32 / @rem;
+    color: #ffe9dd;
+    align-self: flex-start;
+    position: absolute;
+    text-align: left;
+  }
+  // 活动描述
+  &-desc {
+    font-size: 28 / @rem;
+    line-height: 40 / @rem;
+    color: #1b2256;
+    margin-left: 112/@rem;
+    width: 540/@rem;
+    text-align: left;
+  }
+  // 活动banner
+  &-banner{
+    width: 590/@rem;
+    position: absolute;
+    left: 50%;
+    top: 104/@rem;
+    transform: translateX(-50%);
+  }
+  // 活动容器
+  &-box{
+    position: absolute;
+    top: 504/@rem;
+    align-self: flex-start;
+    width: 100%;
+    left: 0;
+    text-align: center;
+  }
+  // 进度描述
+  &-state-desc{
+    margin-top: 24/@rem;
+    margin-left: 101/@rem;
+    width: 546/@rem;
+    font-size: 22/@rem;
+    line-height: 36/@rem;
+    color: #1B2256;
+    text-align: left;
+  }
+  // 邀请记录区域
+  &-icon {
+    margin-top: 80/@rem;
+    text-align: center;
+  }
+  //主按钮
+  &-btn{
+    top: 495/@rem;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+  }
+
+  // 底部按钮区域
+  &-bottom-buttons {
+    position: absolute;
+    top: 1210 / @rem;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+
+    // 我的提升卡
+    &-my-rate-card {
+      width: 168 / @rem;
+      height: 40 / @rem;
+    }
+
+    // 条款及细则
+    &-detail {
+      width: 168 / @rem;
+      height: 40 / @rem;
+    }
+  }
+}
+</style>
+
+
+<style lang="less">
+@import url("~@/less/main.less");
+
+// 为了不影响其他弹窗 此次只做特殊处理
+#prom-dialog .weui-half-screen-dialog__bd{
+  @maxHeight: 160/@rem;
+  max-height: calc(~"100vh - " @maxHeight);
+}
+</style>

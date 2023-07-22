@@ -1,5 +1,6 @@
 {
   "name": "storybook-uniapp-monorepo",
+  "private": true,
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,5 +12,8 @@
   "license": "MIT",
   "devDependencies": {
     "postcss": "8.4.2"
+  },
+  "dependencies": {
+    "@vue/compiler-core": "^3.0.0"
   }
 }

@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "dist",
+    "sourceMap": false,
+    "target": "es2015",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "removeComments": false,
+    "skipLibCheck": true,
+    "jsx": "preserve",
+    "lib": ["esnext", "dom"],
+    "types": ["@dcloudio/types", "miniprogram-api-typings"],
+    "rootDir": ".",
+    "paths": {
+      "@dcloudio/uni-platform": ["./uni-h5/src/platform/index.ts"]
+    }
+  },
+  "include": [
+    "**/src",
+    "uni-h5/types"
+  ]
+}
