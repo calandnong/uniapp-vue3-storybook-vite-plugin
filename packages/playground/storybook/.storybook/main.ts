@@ -4,7 +4,12 @@ import { unPluginUniAppH5 } from 'unplugin-uniapp-h5';
 import * as path from 'node:path';
 
 const config: StorybookConfig = {
-  stories: ["../stories/**/*.mdx", "../stories/**/*.stories.@(js|jsx|ts|tsx)"],
+  stories: [
+    // "../stories/**/*.mdx", 
+    // "../stories/**/*.stories.@(js|jsx|ts|tsx)",
+    "../packages/**/*.mdx", 
+    "../packages/**/*.stories.@(js|jsx|ts|tsx)",
+  ],
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
@@ -28,12 +33,6 @@ const config: StorybookConfig = {
         }
       }
     };
-    // config.optimizeDeps = Object.assign({}, config.optimizeDeps, {
-    //   include: [
-    //     ...(config.optimizeDeps?.include || []),
-    //     path.resolve(__dirname, '../stories/uView2')
-    //   ]
-    // })
     return {
       ...config,
       plugins: [
