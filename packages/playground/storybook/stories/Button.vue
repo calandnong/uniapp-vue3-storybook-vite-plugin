@@ -95,6 +95,9 @@
       </view>
     </view>
     <button @click="selectFile">选择文件</button>
+    <button @click="showToast">打开uiapp的toast</button>
+    <button @click="showModal">打开uiapp的modal</button>
+    <button @click="showActionSheet">打开uiapp的action-sheet</button>
     <view>
         <u-checkbox-group
             v-model="checkboxValue1"
@@ -319,6 +322,40 @@ function selectFile(){
       'https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/shuijiao.jpg'
     ]
   })
+}
+
+
+function showToast() {
+  uni.showToast({
+    title: '打开啦！',
+    duration: 2000
+  });
+}
+
+function showModal() {
+  uni.showModal({
+    title: '提示',
+    content: '这是一个模态弹窗',
+    success: function (res) {
+      if (res.confirm) {
+        console.log('用户点击确定');
+      } else if (res.cancel) {
+        console.log('用户点击取消');
+      }
+    }
+  });
+}
+
+function showActionSheet() {
+  uni.showActionSheet({
+    itemList: ['A', 'B', 'C'],
+    success: function (res) {
+      console.log('选中了第' + (res.tapIndex + 1) + '个按钮');
+    },
+    fail: function (res) {
+      console.log(res.errMsg);
+    }
+  });
 }
 
 </script>
