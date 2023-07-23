@@ -20,6 +20,7 @@ export function unPluginUniAppH5(): Plugin[] {
   plugins.push(uniEnvConfigPlugin());
   // 支持条件编译
   plugins.push(transformConditionalComment());
+  // 转换rpx为rem插件
   plugins.push(transformRpxPlugin());
   // 创建转换【uniapp标签】为【uniapp组件标签】插件
   plugins.push(createUniTagToUniComponentTagPlugin());

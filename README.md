@@ -1,5 +1,7 @@
 # 支持storybook中渲染uniapp的标签/组件/api
 
+插件使用看此处文档：[点击此处跳转](./packages//unplugin-uniapp-h5//README.md)
+
 ## 运行环境
 ```bash
 node
