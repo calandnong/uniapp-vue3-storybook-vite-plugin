@@ -1,6 +1,7 @@
 import { Plugin } from 'vite';
 import { transformTag, transformTagArray, Options, camelToKebab } from './helper/index';
 import { allComponents } from './constants';
+import { UNIAPP_COMPONENTS_PREFIX } from '../common/constants';
 
 export {
   transformTag,
@@ -38,7 +39,7 @@ export function createUniTagToUniComponentTagPlugin(): Plugin {
     const tag = camelToKebab(key);
     return {
       matchTag: tag,
-      replaceTag: `uniapp-${tag}`
+      replaceTag: `${UNIAPP_COMPONENTS_PREFIX}${tag}`
     }
   }));
 }

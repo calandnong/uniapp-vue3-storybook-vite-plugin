@@ -1,4 +1,5 @@
 import { Plugin } from "vite";
+import { UNIAPP_COMPONENTS_PREFIX } from "../common/constants";
 
 export function virtualVuePluginForUniapp(): Plugin {
   const virtualModuleId = 'virtual:vue-plugin-for-uniapp';
@@ -37,8 +38,8 @@ export function virtualVuePluginForUniapp(): Plugin {
             export const registerComponents = (app) => {
               const components = getComponents();
               Object.keys(components).forEach(key => {
-                console.log('allComponent', 'uniapp-'+camelToKebab(key));
-                app.component('uniapp-'+camelToKebab(key), components[key]);
+                console.log('allComponent', \`${UNIAPP_COMPONENTS_PREFIX}\${camelToKebab(key)}\`);
+                app.component(\`${UNIAPP_COMPONENTS_PREFIX}\${camelToKebab(key)}\`, components[key]);
               });
             };
 
