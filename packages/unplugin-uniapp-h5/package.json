@@ -1,6 +1,6 @@
 {
   "name": "unplugin-uniapp-h5",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "支持storybook中渲染uniapp标签",
   "exports": {
     ".": {
@@ -30,8 +30,14 @@
     "test:ui": "vitest --ui",
     "postinstall": "pnpm build"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "storybook",
+    "uniapp",
+    "vite",
+    "vue3",
+    "typescript"
+  ],
+  "author": "calandnong",
   "license": "MIT",
   "dependencies": {
     "@amap/amap-jsapi-types": "^0.0.13",
