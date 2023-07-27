@@ -5,7 +5,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "dev"
+    "dev": "dev",
+    "plugin-build": "pnpm --filter unplugin-uniapp-h5 run build",
+    "postinstall": "pnpm plugin-build"
   },
   "keywords": [],
   "author": "",

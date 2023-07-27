@@ -27,8 +27,7 @@
     "test": "pnpm build && vitest run",
     "test:dev": "vitest run",
     "test:watch": "vitest",
-    "test:ui": "vitest --ui",
-    "postinstall": "pnpm build"
+    "test:ui": "vitest --ui"
   },
   "keywords": [
     "storybook",
