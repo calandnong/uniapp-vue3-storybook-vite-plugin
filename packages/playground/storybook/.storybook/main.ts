@@ -3,6 +3,19 @@ import { StorybookConfig } from '@storybook/vue3-vite';
 import { unPluginUniAppH5 } from 'unplugin-uniapp-h5';
 import * as path from 'node:path';
 
+import { Plugin } from 'vite';
+
+function useTest(): Plugin {
+  return {
+    name: 'vite:xxxxVueTest',
+    transform(code, id) {
+      if(id.includes('.tsx')) {
+        console.log('dasd');
+      }
+    }
+  }
+}
+
 const config: StorybookConfig = {
   stories: [
     // "../stories/**/*.mdx", 
@@ -38,6 +51,18 @@ const config: StorybookConfig = {
       plugins: [
         ...(config.plugins || []),
         unPluginUniAppH5(),
+        // {
+        //   name: 'vite:test-config',
+        //   config: () => {
+        //     return {
+        //       resolve: {
+        //         alias: {
+        //           'vue': path.resolve(__dirname, '../node_modules/vue/dist/vue.esm-bundler.js')
+        //         }
+        //       }
+        //     }
+        //   }
+        // }
       ],
     }
   }

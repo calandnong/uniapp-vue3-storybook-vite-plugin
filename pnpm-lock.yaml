@@ -33,7 +33,7 @@ importers:
       storybook: ^7.0.26
       terser: ^5.19.1
       typescript: ^5.1.6
-      unplugin-uniapp-h5: workspace:*
+      unplugin-uniapp-h5: workspace:^1.0.4
       vite: ^4.4.2
       vue: ^3.3.4
     dependencies:
@@ -41,6 +41,7 @@ importers:
       safe-area-insets: 1.4.1
       terser: 5.19.2
       typescript: 5.1.6
+      unplugin-uniapp-h5: link:../../unplugin-uniapp-h5
       vite: 4.4.6_sass@1.64.1+terser@5.19.2
       vue: 3.3.4
     devDependencies:
@@ -60,7 +61,6 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       sass: 1.64.1
       storybook: 7.1.0
-      unplugin-uniapp-h5: link:../../unplugin-uniapp-h5
 
   packages/unplugin-uniapp-h5:
     specifiers:
@@ -2955,7 +2955,7 @@ packages:
       ts-dedent: 2.2.0
       type-fest: 3.13.1
       vue: 3.3.4
-      vue-component-type-helpers: 1.8.6
+      vue-component-type-helpers: 1.8.15
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -7953,8 +7953,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /vue-component-type-helpers/1.8.6:
-    resolution: {integrity: sha512-vKWeoKVEV51ZzoB8+UY0apMXiifbPQxWlcZlvQRDVdiOHmEkCBClWeIGbqQ8cCR9P4j+oCyLW87sraZFMz/qnA==}
+  /vue-component-type-helpers/1.8.15:
+    resolution: {integrity: sha512-RKiPRKW4BdwgmQ9vaNkHYKAThdTbgU4TOphVyyzqxRwsOJOoRIrb+vB49XLvs5CKPNrvxMXZMwPe5FyJCqFWyg==}
     dev: true
 
   /vue-docgen-api/4.73.1_vue@3.3.4:

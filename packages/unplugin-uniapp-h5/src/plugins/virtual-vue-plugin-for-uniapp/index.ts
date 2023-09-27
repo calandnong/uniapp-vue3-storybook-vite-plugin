@@ -6,6 +6,7 @@ export function virtualVuePluginForUniapp(): Plugin {
   const resolvedVirtualModuleId = '\0' + virtualModuleId
 
   return {
+    enforce: 'pre',
     name: 'vite:virtual-vue-plugin-for-uniapp',
     // 真实虚拟模块 ID 转换为内部虚拟模块 ID，其实就是用于判断和分流
     resolveId(id: string) {
@@ -17,7 +18,36 @@ export function virtualVuePluginForUniapp(): Plugin {
       if (id === resolvedVirtualModuleId) {
         return {
           code: `
-            import * as allComponent from 'unplugin-uniapp-h5/dist/libs/uniapp/uni-components/src/vue/index';
+            import { 
+              Button,
+              Canvas,
+              Checkbox,
+              CheckboxGroup,
+              Editor,
+              Form,
+              Icon,
+              Image,
+              Input,
+              Label,
+              MovableArea,
+              MovableView,
+              Navigator,
+              PickerView,
+              PickerViewColumn,
+              Progress,
+              Radio,
+              RadioGroup,
+              ResizeSensor,
+              RichText,
+              ScrollView,
+              Slider,
+              Swiper,
+              SwiperItem,
+              Switch,
+              Text,
+              Textarea,
+              View,
+            } from '@dcloudio/uni-h5';
             import { Picker } from 'unplugin-uniapp-h5/dist/libs/uniapp/uni-h5/src/view/components/index';
             import { initView } from 'unplugin-uniapp-h5/dist/libs/uniapp/uni-core/src/view/init/index';
 
@@ -30,7 +60,34 @@ export function virtualVuePluginForUniapp(): Plugin {
 
             function getComponents() {
               return {
-                ...allComponent,
+                Button,
+                Canvas,
+                Checkbox,
+                CheckboxGroup,
+                Editor,
+                Form,
+                Icon,
+                Image,
+                Input,
+                Label,
+                MovableArea,
+                MovableView,
+                Navigator,
+                PickerView,
+                PickerViewColumn,
+                Progress,
+                Radio,
+                RadioGroup,
+                ResizeSensor,
+                RichText,
+                ScrollView,
+                Slider,
+                Swiper,
+                SwiperItem,
+                Switch,
+                Text,
+                Textarea,
+                View,
                 Picker,
               }
             }

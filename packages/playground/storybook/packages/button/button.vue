@@ -43,7 +43,6 @@ function showModal() {
         return;
       }
       console.log('用户未确认');
-      
     }
   })
 }
