@@ -77,15 +77,15 @@ export function uniEnvConfigPlugin(): Plugin {
             },
             {
               find: '@dcloudio/uni-h5-api',
-              replacement: resolve('./libs/uniapp/uni-h5/src/service/api/index.ts')
+              replacement: resolve('./libs/uniapp/uni-h5/build/uni-h5.es.js')
             },
             {
               find: '@dcloudio/uni-h5-service-bridge',
-              replacement: resolve('./libs/uniapp/uni-h5/src/service/bridge/index.ts')
+              replacement: resolve('./libs/uniapp/uni-h5/build/uni-h5.es.js')
             },
             {
               find: '@dcloudio/uni-h5-view-bridge',
-              replacement: resolve('./libs/uniapp/uni-h5/src/view/bridge/index.ts')
+              replacement: resolve('./libs/uniapp/uni-h5/build/uni-h5.es.js')
             }
           ],
         }

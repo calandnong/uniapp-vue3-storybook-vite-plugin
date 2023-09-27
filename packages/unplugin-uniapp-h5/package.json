@@ -1,6 +1,6 @@
 {
   "name": "unplugin-uniapp-h5",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "支持storybook中渲染uniapp标签",
   "exports": {
     ".": {
