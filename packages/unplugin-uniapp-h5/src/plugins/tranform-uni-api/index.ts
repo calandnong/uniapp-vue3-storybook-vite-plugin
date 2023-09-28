@@ -16,6 +16,11 @@ function registerGlobalCode(isVue: boolean = false) {
     if(!${global}.getCurrentPages) {
       ${global}.getCurrentPages = getCurrentPagesApi;
     }
+    if(!${global}.getApp) {
+      ${global}.getApp = () => { 
+        return {}; 
+      };
+    }
 
     if(!${global}.uni) {
       ${global}.uni = Object.assign({}, uniApi);
