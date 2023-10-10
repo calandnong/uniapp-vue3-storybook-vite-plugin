@@ -16,7 +16,7 @@ export function uniEnvConfigPlugin(): Plugin {
     config: () => {
       return {
         define: {
-          global: 'window',
+          // global: 'window',
           __PLATFORM__: "'h5'",
           __DEV__: true,
           __NODE_JS__: false,
@@ -66,6 +66,10 @@ export function uniEnvConfigPlugin(): Plugin {
             {
               find: '@dcloudio/uni-h5',
               replacement: resolve('./libs/uniapp/uni-h5/build/uni-h5.es.js')
+            },
+            {
+              find: '@unplugin-uniapp-h5/setup-page',
+              replacement: resolve('./libs/uniapp/uni-h5/src/framework/setup/page')
             },
             {
               find: '@dcloudio/uni-i18n',

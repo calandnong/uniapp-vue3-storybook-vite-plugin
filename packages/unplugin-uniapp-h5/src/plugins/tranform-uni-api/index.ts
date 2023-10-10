@@ -11,7 +11,7 @@ function registerGlobalCode(isVue: boolean = false) {
     import * as uniApi from '@dcloudio/uni-h5-api';
     import { UniServiceJSBridge } from '@dcloudio/uni-h5-service-bridge';
     import { UniViewJSBridge } from '@dcloudio/uni-h5-view-bridge';
-    import { getCurrentPages as getCurrentPagesApi } from 'unplugin-uniapp-h5/dist/libs/uniapp/uni-h5/src/framework/setup/page';
+    import { getCurrentPages as getCurrentPagesApi } from '@unplugin-uniapp-h5/setup-page';
 
     if(!${global}.getCurrentPages) {
       ${global}.getCurrentPages = getCurrentPagesApi;
@@ -25,12 +25,12 @@ function registerGlobalCode(isVue: boolean = false) {
     if(!${global}.uni) {
       ${global}.uni = Object.assign({}, uniApi);
     }
-    const uni = ${global}.uni;
+
     if(!${global}.wx) {
-      ${global}.wx = uni;
+      ${global}.wx = Object.assign({}, uniApi);
     }
     if(!${global}.rpx2px) {
-      ${global}.rpx2px = uni.upx2px;
+      ${global}.rpx2px = uniApi.upx2px;
     }
     if(!${global}.UniServiceJSBridge) {
       ${global}.UniServiceJSBridge = UniServiceJSBridge;
@@ -60,7 +60,7 @@ function generateConfig(
     dark: {},
   };
   return `
-    const extend = Object.assign;
+    window.extend = Object.assign;
     ${globalName}.__uniConfig=extend(${JSON.stringify(pagesJson)},{
         networkTimeout:${JSON.stringify(networkTimeout)},
         themeConfig:${JSON.stringify(themeConfig)},

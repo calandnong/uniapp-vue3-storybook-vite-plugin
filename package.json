@@ -5,7 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "dev",
+    "preview": "pnpm --filter uniapp-components run storybook",
+    "preview:build": "pnpm --filter uniapp-components run build-storybook",
     "plugin-build": "pnpm --filter unplugin-uniapp-h5 run build"
   },
   "keywords": [],
