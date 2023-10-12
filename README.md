@@ -14,11 +14,15 @@ node
 pnpm i
 ```
 
-## 运行示例
+## 运行演示示例
 根目录执行下面代码：
 ```bash
-cd packages/playground/storybook
-pnpm storybook
+pnpm preview
+```
+
+## 编译演示示例
+```bash
+pnpm preview:build
 ```
 
 ## 运行截图
