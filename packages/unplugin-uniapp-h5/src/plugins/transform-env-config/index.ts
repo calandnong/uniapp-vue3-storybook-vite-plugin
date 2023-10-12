@@ -92,7 +92,7 @@ export function uniEnvConfigPlugin(): Plugin {
               replacement: resolve('./libs/uniapp/uni-h5/build/uni-h5.es.js')
             }
           ],
-        }
+        },
       }
     }
   }

@@ -45,6 +45,11 @@
 </template>
 
 <script>
+import UOverlay from '../u-overlay/u-overlay.vue';
+import UTransition from '../u-transition/u-transition.vue';
+import USafeBottom from '../u-safe-bottom/u-safe-bottom.vue';
+import UStatusBar from '../u-status-bar/u-status-bar.vue';
+
 import props from './props.js';
 
 /**
@@ -72,6 +77,12 @@ import props from './props.js';
 	 * @example <u-popup v-model="show"><text>出淤泥而不染，濯清涟而不妖</text></u-popup>
 	 */
 export default {
+  components: {
+    UOverlay,
+    UTransition,
+    USafeBottom,
+    UStatusBar,
+  },
   name: 'u-popup',
   mixins: [uni.$u.mpMixin, uni.$u.mixin, props],
   data() {

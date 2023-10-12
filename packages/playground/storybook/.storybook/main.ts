@@ -1,7 +1,9 @@
 import { StorybookConfig } from '@storybook/vue3-vite';
 // import { unPluginUniAppH5 } from '../../../unplugin-uniapp-h5/src/index';
-import { unPluginUniAppH5 } from 'unplugin-uniapp-h5';
+import { unPluginUniAppH5, createVueOptions } from 'unplugin-uniapp-h5';
 import * as path from 'node:path';
+import { Plugin } from 'vite';
+import vue from '@vitejs/plugin-vue';
 
 const config: StorybookConfig = {
   stories: [
@@ -33,6 +35,24 @@ const config: StorybookConfig = {
         }
       }
     };
+    const index = config.plugins?.findIndex((item) => {
+      const _item = item as Plugin;
+      if(_item.name === 'vite:vue') {
+        console.log('查询到了',_item);
+        return true;
+      }
+      return false;
+    });
+    if(index && index !== -1 && config.plugins) {    
+      console.log('findIndex', config.plugins);  
+      config.plugins[index] = vue({
+        template: {
+          compilerOptions: {
+            ...createVueOptions(),
+          }
+        }
+      });
+    }
     return {
       ...config,
       plugins: [

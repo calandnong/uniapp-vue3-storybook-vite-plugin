@@ -25,7 +25,7 @@
 					<text
 					    class="u-keyboard__tooltip__item u-keyboard__tooltip__cancel"
 					    v-if="showCancel"
-					    @tap="onCancel"
+							@tap="onCancel"
 					>{{showCancel && cancelText}}</text>
 				</view>
 				<view>
@@ -68,6 +68,9 @@
 </template>
 
 <script>
+	import UCarKeyboard from '../u-car-keyboard/u-car-keyboard.vue';
+	import UPopup from '../u-popup/u-popup.vue';
+	import UNumberKeyBoard from '../u-number-keyboard/u-number-keyboard.vue';
 	import props from './props.js';
 
 	/**
@@ -97,12 +100,18 @@
 	 * @example <u-keyboard mode="number" v-model="show"></u-keyboard>
 	 */
 	export default {
+		components: {
+			UPopup,
+			UCarKeyboard,
+			UNumberKeyBoard,
+		},
 		name: "u-keyboard",
 		data() {
 			return {
 
 			}
 		},
+		emits: ['cancel', 'contact'],
 		mixins: [uni.$u.mpMixin, uni.$u.mixin,props],
 		methods: {
 			change(e) {

@@ -4,7 +4,6 @@
     :class="[
       `o-button-${type}`
     ]"
-    @click="showModal"
   >
     {{ text }}
     <slot></slot>
@@ -12,7 +11,6 @@
 </template>
 
 <script setup lang="ts">
-
 export type ButtonType = 'info' | 'error';
 
 export interface Props {
@@ -30,23 +28,6 @@ withDefaults(defineProps<Props>(), {
   text: '',
   type: 'info'
 });
-
-
-function showModal() {
-  uni.showModal({
-    title: '提示',
-    content: '是的呢',
-    showCancel: true,
-    success: ({ confirm }) => {
-      if(confirm) {
-        console.log('用户确认了');
-        return;
-      }
-      console.log('用户未确认');
-    }
-  })
-}
-
 </script>
 
 
