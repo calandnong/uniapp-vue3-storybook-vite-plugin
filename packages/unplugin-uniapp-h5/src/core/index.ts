@@ -3,19 +3,24 @@ import { createUniTagToUniComponentTagPlugin } from "../plugins/transform-uniapp
 import { uniEnvConfigPlugin } from "../plugins/transform-env-config";
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import { virtualGlobalCssPlugin } from "../plugins/global-css";
-import { registerGlobalCodePlugin } from "../plugins/tranform-uni-api/index";
+import { registerGlobalCodePlugin, GlobalCodeOptions } from "../plugins/tranform-uni-api/index";
 import { virtualVuePluginForUniapp } from "../plugins/virtual-vue-plugin-for-uniapp";
 import { transformConditionalComment } from "../plugins/transform-conditional-comment";
 import { transformRpxPlugin } from "../plugins/transform-rpx";
 // @ts-ignore
-import { default as commonjs } from 'vite-plugin-commonjs/dist/index.mjs';
+import commonjs from 'vite-plugin-commonjs/dist/index.js';
+
+export interface Options extends GlobalCodeOptions {
+};
 
 /**
  * 支持h5渲染uniapp插件
  * @returns 
  */
-export function unPluginUniAppH5(): Plugin[] {
+export function unPluginUniAppH5(options?: Options): Plugin[] {
   const plugins: Plugin[] = [];
+  // 处理commomjs的内容
+  plugins.push(commonjs());
   // 支持uniapp上下文环境变量
   plugins.push(uniEnvConfigPlugin());
   // 支持条件编译
@@ -25,7 +30,7 @@ export function unPluginUniAppH5(): Plugin[] {
   // 创建转换【uniapp标签】为【uniapp组件标签】插件
   plugins.push(createUniTagToUniComponentTagPlugin());
   // 注入全局的代码(uni-api)
-  plugins.push(registerGlobalCodePlugin());
+  plugins.push(registerGlobalCodePlugin(options));
   // 增加css虚拟模块
   plugins.push(virtualGlobalCssPlugin());
   // 增加vue插件虚拟模块
@@ -38,7 +43,5 @@ export function unPluginUniAppH5(): Plugin[] {
       return tag.startsWith('uni-');
     }
   }));
-  // 处理commomjs的内容
-  plugins.push(commonjs());
   return plugins;
 }

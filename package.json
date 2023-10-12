@@ -5,15 +5,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "preview": "pnpm --filter uniapp-components run storybook",
-    "preview:build": "pnpm --filter uniapp-components run build-storybook",
+    "pre-build": "tsx ./scripts/pre-build.ts",
+    "preview": "pnpm pre-build && pnpm --filter uniapp-components run storybook",
+    "preview:build": "pnpm pre-build && pnpm --filter uniapp-components run build-storybook",
     "plugin-build": "pnpm --filter unplugin-uniapp-h5 run build"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "postcss": "8.4.2"
+    "@types/fs-extra": "^11.0.1",
+    "fs-extra": "^11.1.1",
+    "postcss": "8.4.2",
+    "tsx": "^3.12.7"
   },
   "dependencies": {
     "@vue/compiler-core": "^3.0.0"

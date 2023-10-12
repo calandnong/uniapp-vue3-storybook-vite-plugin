@@ -24,19 +24,18 @@
     "@storybook/vue3-vite": "^7.0.26",
     "@vitejs/plugin-legacy": "^4.1.0",
     "@vitejs/plugin-vue": "^4.2.3",
-    "cjs2esmodule": "^1.1.1",
+    "@vitejs/plugin-vue-jsx": "^3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sass": "^1.63.6",
-    "storybook": "^7.0.26"
-  },
-  "dependencies": {
-    "@vitejs/plugin-vue-jsx": "^3.0.1",
     "safe-area-insets": "^1.4.1",
+    "sass": "^1.63.6",
+    "storybook": "^7.0.26",
     "terser": "^5.19.1",
     "typescript": "^5.1.6",
-    "unplugin-uniapp-h5": "workspace:^1.0.4",
-    "vite": "^4.4.2",
+    "unplugin-uniapp-h5": "workspace:*",
+    "vite": "^4.4.2"
+  },
+  "dependencies": {
     "vue": "^3.3.4"
   }
 }

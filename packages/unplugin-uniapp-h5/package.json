@@ -1,6 +1,6 @@
 {
   "name": "unplugin-uniapp-h5",
-  "version": "1.0.8",
+  "version": "1.0.10",
   "description": "支持storybook中渲染uniapp标签",
   "exports": {
     ".": {
@@ -48,7 +48,7 @@
     "postcss-selector-parser": "^6.0.13",
     "safe-area-insets": "^1.4.1",
     "vite": "^4.0.0",
-    "vite-plugin-commonjs": "^0.8.2",
+    "vite-plugin-commonjs": "^0.10.0",
     "vue": "3.2.47",
     "vue-router": "^4.2.4",
     "xregexp": "3.1.0"
@@ -71,7 +71,6 @@
     "rollup-plugin-esbuild": "^5.0.0",
     "tsx": "^3.12.7",
     "typescript": "^5.1.6",
-    "unplugin-uniapp-h5": "workspace:*",
     "vitest": "^0.33.0"
   },
   "publishConfig": {
