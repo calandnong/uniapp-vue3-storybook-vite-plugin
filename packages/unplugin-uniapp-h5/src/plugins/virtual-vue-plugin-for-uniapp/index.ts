@@ -95,7 +95,7 @@ export function virtualVuePluginForUniapp(): Plugin {
             export const registerComponents = (app) => {
               const components = getComponents();
               Object.keys(components).forEach(key => {
-                console.log('allComponent', \`${UNIAPP_COMPONENTS_PREFIX}\${camelToKebab(key)}\`);
+                // console.log('allComponent', \`${UNIAPP_COMPONENTS_PREFIX}\${camelToKebab(key)}\`);
                 app.component(\`${UNIAPP_COMPONENTS_PREFIX}\${camelToKebab(key)}\`, components[key]);
               });
             };
