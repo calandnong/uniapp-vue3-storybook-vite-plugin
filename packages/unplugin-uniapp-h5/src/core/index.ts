@@ -9,6 +9,10 @@ import { transformConditionalComment } from "../plugins/transform-conditional-co
 import { transformRpxPlugin } from "../plugins/transform-rpx";
 // @ts-ignore
 import commonjs from 'vite-plugin-commonjs/dist/index.js';
+import { uniRenderjsPlugin } from '../plugins/transform-render-js';
+import { uniPreVuePlugin } from "../plugins/transform-custom-vue";
+import { uniPostVuePlugin } from "../plugins/transform-post-vue";
+import { rewriteCompilerSfcParse } from "../node";
 
 export interface Options extends GlobalCodeOptions {
 };
@@ -21,6 +25,10 @@ export function unPluginUniAppH5(options?: Options): Plugin[] {
   const plugins: Plugin[] = [];
   // 处理commomjs的内容
   plugins.push(commonjs());
+  // 处理renderjs
+  plugins.push(uniPostVuePlugin());
+  plugins.push(uniRenderjsPlugin());
+  plugins.push(uniPreVuePlugin());
   // 支持uniapp上下文环境变量
   plugins.push(uniEnvConfigPlugin());
   // 支持条件编译
@@ -43,5 +51,6 @@ export function unPluginUniAppH5(options?: Options): Plugin[] {
       return tag.startsWith('uni-');
     }
   }));
+  rewriteCompilerSfcParse();
   return plugins;
 }

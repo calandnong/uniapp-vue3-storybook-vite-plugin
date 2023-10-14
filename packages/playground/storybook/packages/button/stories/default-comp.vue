@@ -46,8 +46,6 @@ function showModal() {
     }
   })
 }
-
-
 </script>
 
 

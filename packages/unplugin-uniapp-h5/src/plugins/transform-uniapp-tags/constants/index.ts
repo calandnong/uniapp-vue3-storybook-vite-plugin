@@ -27,4 +27,5 @@ export const allComponents = [
   'navigator',
   'image',
   'picker',
+  'canvas',
 ];
