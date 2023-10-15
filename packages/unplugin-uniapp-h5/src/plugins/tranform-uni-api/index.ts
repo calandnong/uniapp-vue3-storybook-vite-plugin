@@ -13,6 +13,10 @@ export function registerGlobalCode(isVue: boolean = false) {
     import { UniViewJSBridge as ____UniViewJSBridgeByUnpluginUniapp } from '@dcloudio/uni-h5-view-bridge';
     import { getCurrentPages as getCurrentPagesApi } from '@unplugin-uniapp-h5/setup-page';
 
+    if(!${global}.uniCloud) {
+      ${global}.uniCloud = {};
+    }
+
     if(!${global}.getCurrentPages) {
       ${global}.getCurrentPages = getCurrentPagesApi;
     }

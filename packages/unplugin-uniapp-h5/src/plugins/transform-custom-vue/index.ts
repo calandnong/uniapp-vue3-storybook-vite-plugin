@@ -14,8 +14,9 @@ export function uniPreVuePlugin(): Plugin {
   let isNVue = false
   return {
     name: 'uni:pre-vue',
+    enforce: 'pre',
     config(config) {
-      isNVue = (config as any).nvue
+      isNVue = false;
     },
     async transform(code, id) {
       const { filename, query } = parseVueRequest(id)
@@ -29,8 +30,9 @@ export function uniPreVuePlugin(): Plugin {
       clearMiniProgramTemplateFilter(
         removeExt(normalizeMiniProgramFilename(id, process.env.UNI_INPUT_DIR))
       )
+      const result = parseVueCode(code, isNVue);
       return {
-        code: parseVueCode(code, isNVue).code, // 暂不提供sourcemap,意义不大
+        code: result.code, // 暂不提供sourcemap,意义不大
         map: null,
       }
     },

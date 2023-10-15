@@ -12,6 +12,7 @@
   </view>
   </view>
 </template>
+<script src="./wx.wxs" module="wxsswipe" lang="wxs"></script>
 
 <script setup lang="ts">
 import { ref, useAttrs } from 'vue';
