@@ -30,7 +30,7 @@
 			<input
 			    confirm-type="search"
 			    @blur="blur"
-			    :value="value"
+			    :value="modelValue"
 			    @confirm="search"
 			    @input="inputChange"
 			    :disabled="disabled"
@@ -112,6 +112,7 @@
 	export default {
 		name: "u-search",
 		mixins: [uni.$u.mpMixin, uni.$u.mixin,props],
+		emits: ['change', 'input', 'clear', 'focus', 'custom', 'search', 'click', 'clickIcon', 'blur', 'update:modelValue'],
 		data() {
 			return {
 				keyword: '',
@@ -127,10 +128,11 @@
 			keyword(nVal) {
 				// 双向绑定值，让v-model绑定的值双向变化
 				this.$emit('input', nVal);
+				this.$emit('update:modelValue', nVal);
 				// 触发change事件，事件效果和v-model双向绑定的效果一样，让用户多一个选择
 				this.$emit('change', nVal);
 			},
-			value: {
+			modelValue: {
 				immediate: true,
 				handler(nVal) {
 					this.keyword = nVal;

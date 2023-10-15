@@ -47,9 +47,21 @@ export function virtualVuePluginForUniapp(): Plugin {
               Text,
               Textarea,
               View,
+              Video,
+              WebView,
+              Map,
+              CoverView,
+              CoverImage,
+              Picker,
+              //Unsupported
+              Ad,
+              AdContentPage,
+              AdDraw,
+              Camera,
+              LivePlayer,
+              LivePusher,
             } from '@dcloudio/uni-h5';
-            import { Picker } from 'unplugin-uniapp-h5/dist/libs/uniapp/uni-h5/src/view/components/index';
-            import { initView } from 'unplugin-uniapp-h5/dist/libs/uniapp/uni-core/src/view/init/index';
+            import initView from '@unplugin-uniapp-h5/framework';
 
             function camelToKebab(str) {
               return str
@@ -88,7 +100,19 @@ export function virtualVuePluginForUniapp(): Plugin {
                 Text,
                 Textarea,
                 View,
+                Video,
+                WebView,
+                Map,
+                CoverView,
+                CoverImage,
                 Picker,
+                //Unsupported
+                Ad,
+                AdContentPage,
+                AdDraw,
+                Camera,
+                LivePlayer,
+                LivePusher,
               }
             }
 
@@ -103,7 +127,7 @@ export function virtualVuePluginForUniapp(): Plugin {
             const vuePluginForUniapp = {
               install(app) {
                 // 初始化uniapp相关运行时视图层依赖
-                initView();
+                app.use(initView);
                 // 初始化全局组件
                 registerComponents(app);
               }

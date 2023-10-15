@@ -1,1 +1,0 @@
-import { UniServiceJSBridge, UniViewJSBridge } from './index'

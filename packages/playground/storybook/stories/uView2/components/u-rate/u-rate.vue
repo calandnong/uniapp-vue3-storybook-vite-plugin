@@ -184,6 +184,7 @@
 			},
 			// 通过点击，直接选中
 			clickHandler(e, index) {
+				console.log(e);
 				// ios上，moving状态取消事件触发
 				if (uni.$u.os() === "ios" && this.moving) {
 					return;

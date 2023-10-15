@@ -32,6 +32,8 @@ export function uniEnvConfigPlugin(): Plugin {
           __UNI_FEATURE_I18N_ZH_HANT__: true,
           __UNI_FEATURE_WXS__: false,
           __UNI_FEATURE_LONGPRESS__: true,
+          __UNI_FEATURE_UNI_CLOUD__: false,
+          __UNI_FEATURE_PAGES__: false,
         },
         resolve: {
           alias: [
@@ -65,11 +67,15 @@ export function uniEnvConfigPlugin(): Plugin {
             // },
             {
               find: '@dcloudio/uni-h5',
-              replacement: resolve('./libs/uniapp/uni-h5/build/uni-h5.es.js')
+              replacement: resolve('./libs/uniapp/uni-h5/src/index.ts')
             },
             {
               find: '@unplugin-uniapp-h5/setup-page',
               replacement: resolve('./libs/uniapp/uni-h5/src/framework/setup/page')
+            },
+            {
+              find: '@unplugin-uniapp-h5/framework',
+              replacement: resolve('./libs/uniapp/uni-h5/src/framework/plugin/index.ts')
             },
             {
               find: '@dcloudio/uni-i18n',
@@ -92,6 +98,9 @@ export function uniEnvConfigPlugin(): Plugin {
               replacement: resolve('./libs/uniapp/uni-h5/build/uni-h5.es.js')
             }
           ],
+        },
+        optimizeDeps: {
+          include: ['@dcloudio/uni-api', '@unplugin-uniapp-h5/framework']
         },
       }
     }

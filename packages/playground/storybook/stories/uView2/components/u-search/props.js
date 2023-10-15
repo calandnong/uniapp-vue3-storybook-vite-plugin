@@ -95,7 +95,7 @@ export default {
             default: uni.$u.props.search.animation
         },
         // 输入框的初始化内容
-        value: {
+        modelValue: {
             type: String,
             default: uni.$u.props.search.value
         },
