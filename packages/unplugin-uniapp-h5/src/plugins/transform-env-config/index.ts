@@ -67,7 +67,7 @@ export function uniEnvConfigPlugin(): Plugin {
             // },
             {
               find: '@dcloudio/uni-h5',
-              replacement: resolve('./libs/uniapp/uni-h5/src/index.ts')
+              replacement: resolve('./libs/uniapp/uni-h5/build/uni-h5.es.js')
             },
             {
               find: '@unplugin-uniapp-h5/setup-page',
@@ -98,10 +98,7 @@ export function uniEnvConfigPlugin(): Plugin {
               replacement: resolve('./libs/uniapp/uni-h5/build/uni-h5.es.js')
             }
           ],
-        },
-        optimizeDeps: {
-          include: ['@dcloudio/uni-api', '@unplugin-uniapp-h5/framework']
-        },
+        }
       }
     }
   }
