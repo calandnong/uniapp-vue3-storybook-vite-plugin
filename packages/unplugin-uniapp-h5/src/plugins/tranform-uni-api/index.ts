@@ -1,42 +1,51 @@
 import { Plugin } from "vite";
 
-function getGlobal(ssr?: boolean) {
+export function getGlobal(ssr?: boolean) {
   return ssr ? 'global' : 'window'
 }
 // 兼容 wx 对象
-function registerGlobalCode(isVue: boolean = false) {
+export function registerGlobalCode(isVue: boolean = false) {
   const global = getGlobal(false);
   // 目前仅支持部分uni的api
   return `
-    import * as uniApi from '@dcloudio/uni-h5-api';
-    import { UniServiceJSBridge } from '@dcloudio/uni-h5-service-bridge';
-    import { UniViewJSBridge } from '@dcloudio/uni-h5-view-bridge';
-    import { getCurrentPages as getCurrentPagesApi } from 'unplugin-uniapp-h5/dist/libs/uniapp/uni-h5/src/framework/setup/page';
+    import * as ____uniApiByUnpluginUniapp from '@dcloudio/uni-h5-api';
+    import { UniServiceJSBridge as ____UniServiceJSBridgeByUnpluginUniapp } from '@dcloudio/uni-h5-service-bridge';
+    import { UniViewJSBridge as ____UniViewJSBridgeByUnpluginUniapp } from '@dcloudio/uni-h5-view-bridge';
+    import { getCurrentPages as getCurrentPagesApi } from '@unplugin-uniapp-h5/setup-page';
+
+    if(!${global}.uniCloud) {
+      ${global}.uniCloud = {};
+    }
 
     if(!${global}.getCurrentPages) {
       ${global}.getCurrentPages = getCurrentPagesApi;
     }
+    if(!${global}.getApp) {
+      ${global}.getApp = () => { 
+        return {}; 
+      };
+    }
 
     if(!${global}.uni) {
-      ${global}.uni = Object.assign({}, uniApi);
+      ${global}.uni = Object.assign({}, ____uniApiByUnpluginUniapp);
     }
-    const uni = ${global}.uni;
+
     if(!${global}.wx) {
-      ${global}.wx = uni;
+      ${global}.wx = Object.assign({}, ____uniApiByUnpluginUniapp);
     }
     if(!${global}.rpx2px) {
-      ${global}.rpx2px = uni.upx2px;
+      ${global}.rpx2px = ____uniApiByUnpluginUniapp.upx2px;
     }
     if(!${global}.UniServiceJSBridge) {
-      ${global}.UniServiceJSBridge = UniServiceJSBridge;
+      ${global}.UniServiceJSBridge = ____UniServiceJSBridgeByUnpluginUniapp;
     }
     if(!${global}.UniViewJSBridge) {
-      ${global}.UniViewJSBridge = UniViewJSBridge;
+      ${global}.UniViewJSBridge = ____UniViewJSBridgeByUnpluginUniapp;
     }
   `
 }
 
-function generateConfig(
+export function generateConfig(
   globalName: string,
   pagesJson: Record<string, unknown> = {}
 ) {
@@ -55,7 +64,7 @@ function generateConfig(
     dark: {},
   };
   return `
-    const extend = Object.assign;
+    window.extend = Object.assign;
     ${globalName}.__uniConfig=extend(${JSON.stringify(pagesJson)},{
         networkTimeout:${JSON.stringify(networkTimeout)},
         themeConfig:${JSON.stringify(themeConfig)},
@@ -74,8 +83,29 @@ export function replaceTagContent(template: string, replaceContent: string) {
   return result;
 }
 
+export interface GlobalCodeOptions {
+  include?: (RegExp | string)[];
+}
 
-export function registerGlobalCodePlugin(): Plugin {
+function isInclude(id: string, matchValue?: (RegExp | string)[]) {
+  if(!matchValue) {
+    return false;
+  }
+  for (const value of matchValue) {
+    if (value instanceof RegExp) {
+      if (value.test(id)) {
+        return true;
+      }
+    } else if (typeof value === 'string') {
+      if (id.includes(value)) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+export function registerGlobalCodePlugin(options?: GlobalCodeOptions): Plugin {
   return {
     name: 'vite:register-global-code-plugin',
     enforce: 'pre',
@@ -89,7 +119,9 @@ export function registerGlobalCodePlugin(): Plugin {
       }
       // 处理非vite插件（unplugin-uniapp-h5）的js/ts中uni的api使用
       if(
-        (!id.includes('unplugin-uniapp-h5'))
+        // node_modules中不增加
+        (!id.includes('node_modules') || isInclude(id, options?.include))
+        && (!id.includes('unplugin-uniapp-h5'))
         // && (!id.includes('uView2'))
         && ((/\.ts$/.test(id)) || (/\.js$/.test(id)) || (/\.tsx$/.test(id)) || (/\.jsx$/.test(id)))
       ) {

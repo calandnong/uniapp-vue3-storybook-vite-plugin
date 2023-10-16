@@ -6,7 +6,7 @@ import { UNIAPP_COMPONENTS_PREFIX } from '../common/constants';
 export {
   transformTag,
   transformTagArray,
-  type Options,
+  type Options as TransformTagOptions,
 };
 
 /**

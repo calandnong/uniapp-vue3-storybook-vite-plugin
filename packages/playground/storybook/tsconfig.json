@@ -26,6 +26,7 @@
   },
   "include": [
     "./stories/**/*",
-    "./packages/**/*"
+    "./packages/**/*",
+    "./components.d.ts"
   ]
 }

@@ -37,6 +37,7 @@ commonPlugins.push(NodeResolve({
 const externals: string[] = [
   // 依赖external
   ...Object.keys(pkg.dependencies),
+  'resolve',
 ];
 
 export default defineConfig([

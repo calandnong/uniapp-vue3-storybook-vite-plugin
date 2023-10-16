@@ -16,7 +16,7 @@ export function uniEnvConfigPlugin(): Plugin {
     config: () => {
       return {
         define: {
-          global: 'window',
+          // global: 'window',
           __PLATFORM__: "'h5'",
           __DEV__: true,
           __NODE_JS__: false,
@@ -32,6 +32,8 @@ export function uniEnvConfigPlugin(): Plugin {
           __UNI_FEATURE_I18N_ZH_HANT__: true,
           __UNI_FEATURE_WXS__: false,
           __UNI_FEATURE_LONGPRESS__: true,
+          __UNI_FEATURE_UNI_CLOUD__: false,
+          __UNI_FEATURE_PAGES__: false,
         },
         resolve: {
           alias: [
@@ -68,6 +70,14 @@ export function uniEnvConfigPlugin(): Plugin {
               replacement: resolve('./libs/uniapp/uni-h5/build/uni-h5.es.js')
             },
             {
+              find: '@unplugin-uniapp-h5/setup-page',
+              replacement: resolve('./libs/uniapp/uni-h5/src/framework/setup/page')
+            },
+            {
+              find: '@unplugin-uniapp-h5/framework',
+              replacement: resolve('./libs/uniapp/uni-h5/src/framework/plugin/index.ts')
+            },
+            {
               find: '@dcloudio/uni-i18n',
               replacement: resolve('./libs/uniapp/uni-i18n/build/uni-i18n.es.js')
             },
@@ -77,15 +87,15 @@ export function uniEnvConfigPlugin(): Plugin {
             },
             {
               find: '@dcloudio/uni-h5-api',
-              replacement: resolve('./libs/uniapp/uni-h5/src/service/api/index.ts')
+              replacement: resolve('./libs/uniapp/uni-h5/build/uni-h5.es.js')
             },
             {
               find: '@dcloudio/uni-h5-service-bridge',
-              replacement: resolve('./libs/uniapp/uni-h5/src/service/bridge/index.ts')
+              replacement: resolve('./libs/uniapp/uni-h5/build/uni-h5.es.js')
             },
             {
               find: '@dcloudio/uni-h5-view-bridge',
-              replacement: resolve('./libs/uniapp/uni-h5/src/view/bridge/index.ts')
+              replacement: resolve('./libs/uniapp/uni-h5/build/uni-h5.es.js')
             }
           ],
         }

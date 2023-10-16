@@ -2,6 +2,7 @@ import { Plugin } from "vite";
 import * as path from 'node:path';
 import * as fs from 'node:fs';
 import { ROOT_PATH } from "../../constant";
+import { generateConfig, getGlobal, registerGlobalCode } from "../tranform-uni-api";
 
 function getGlobalCss() {
   return fs.readFileSync(path.resolve(ROOT_PATH, './global.css')).toString();
@@ -21,8 +22,11 @@ export function virtualGlobalCssPlugin(): Plugin {
     },
     load(id) {
       if (id === resolvedVirtualModuleId) {
+        
         return {
           code: `
+              ${generateConfig(getGlobal())}
+              ${registerGlobalCode()}
               if (typeof window !== 'undefined') {
                 function loadCss() {
                   var body = document.body;

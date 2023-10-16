@@ -72,7 +72,7 @@ export function transformConditionalComment(): Plugin {
         code = preJsFile(code);
       }
 
-      console.log('transformConditionalComment--->', code);
+      // console.log('transformConditionalComment--->', code);
       
       return {
         code,
